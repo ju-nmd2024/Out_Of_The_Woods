@@ -7,8 +7,12 @@ let platform;
 function setup() {
   createCanvas(900, 700);
   frameRate(60);
-  character = new Character(100, 550, 65, 60);
-  platform = new Platform(180, 485, 120, 20);
+
+  //Draws character
+  character = new Character(240, 650, 65, 60);
+
+  //Draws platforms
+  platform = new Platform(180, 520, 120, 20);
 }
 
 window.setup = setup;
