@@ -4,7 +4,7 @@ export default class Character {
     this.y = y;
     this.sizeX = sizeX;
     this.sizeY = sizeY;
-    this.speedX = 6;
+    this.movementSpeed = 6;
     this.gravity = 0.6;
     this.velocity = 0.4;
     this.isGrounded = false;
@@ -20,12 +20,12 @@ export default class Character {
     ellipse(this.x, this.y, this.sizeX, this.sizeY);
   }
 
-  update() {
+  update(platforms) {
     //Movement Keys
     if (keyIsDown(65) || keyIsDown(37)) {
-      this.x -= this.speedX;
+      this.x -= this.movementSpeed;
     } else if (keyIsDown(68) || keyIsDown(39)) {
-      this.x += this.speedX;
+      this.x += this.movementSpeed;
     }
 
     //Jumping
@@ -43,11 +43,19 @@ export default class Character {
       this.velocity += this.gravity;
     }
 
-    //Ground
-    if (this.y >= 610) {
-      this.y = 610;
-      this.velocity = 0;
-      this.isGrounded = true;
+    //Collisions with platforms
+    this.isGrounded = false;
+    for (let platform of platforms) {
+      if (
+        this.y + this.sizeY / 2 <= platform.y &&
+        this.y + this.sizeY / 2 + this.velocity >= platform.y &&
+        this.x + this.sizeX / 2 - 20 > platform.x &&
+        this.x - this.sizeX / 2 + 20 < platform.x + platform.sizeX
+      ) {
+        this.y = platform.y - this.sizeY / 2;
+        this.velocity = 0;
+        this.isGrounded = true;
+      }
     }
   }
 }
