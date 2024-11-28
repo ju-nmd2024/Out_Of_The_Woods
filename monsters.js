@@ -9,14 +9,13 @@ export default class Monster {
 
   draw() {
     push();
-    fill(38, 14, 63);
-    stroke(38, 14, 63);
+    fill(75, 0, 130);
     rect(this.x, this.y, this.sizeX, this.sizeY);
     fill(255);
-    ellipse(this.x + 22, this.y + 12, this.sizeX / 6);
+    ellipse(this.x + 25, this.y + 15, this.sizeX - 85);
     stroke(255);
-    strokeWeight(2);
-    line(this.x + 10, this.y + 10, this.x + 25, this.y + 2);
+    strokeWeight(3);
+    line(this.x + 10, this.y + 15, this.x + 25, this.y + 2);
     pop();
   }
 }

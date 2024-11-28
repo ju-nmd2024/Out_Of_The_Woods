@@ -38,7 +38,6 @@ export default class Character {
     }
 
     //Gravity
-    //Continuous
     this.y += this.velocity;
 
     //Apply gravity when not grounded
