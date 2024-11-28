@@ -5,14 +5,15 @@ export default class Character {
     this.sizeX = sizeX;
     this.sizeY = sizeY;
     this.movementSpeed = 6;
-    this.gravity = 0.6;
-    this.velocity = 0.4;
-    this.isGrounded = false;
-    this.jumpHeight = -14;
+    this.gravity = 0.4;
+    this.velocity = 0;
+    this.onGround = false;
+    this.jumpHeight = -12;
+    this.camera = 0;
   }
 
   draw() {
-    fill(255);
+    fill(225);
     ellipse(this.x - 15, this.y + 25, this.sizeX - 90, this.sizeY - 80);
     ellipse(this.x + 15, this.y + 25, this.sizeX - 90, this.sizeY - 80);
     ellipse(this.x - 25, this.y - 5, this.sizeX - 90, this.sizeY - 80);
@@ -21,30 +22,32 @@ export default class Character {
   }
 
   update(platforms) {
-    //Movement Keys
+    //Movement keys
     if (keyIsDown(65) || keyIsDown(37)) {
       this.x -= this.movementSpeed;
+      this.camera += this.movementSpeed;
     } else if (keyIsDown(68) || keyIsDown(39)) {
       this.x += this.movementSpeed;
+      this.camera -= this.movementSpeed;
     }
 
     //Jumping
-    if (keyIsDown(32) && this.isGrounded) {
+    if (keyIsDown(32) && this.onGround) {
       this.velocity = this.jumpHeight;
-      this.isGrounded = false;
+      this.onGround = false;
     }
 
     //Gravity
     //Continuous
     this.y += this.velocity;
 
-    //Apply gravity When not grounded
-    if (!this.isGrounded) {
+    //Apply gravity when not grounded
+    if (!this.onGround) {
       this.velocity += this.gravity;
     }
 
     //Collisions with platforms
-    this.isGrounded = false;
+    this.onGround = false;
     for (let platform of platforms) {
       if (
         this.y + this.sizeY / 2 <= platform.y &&
@@ -54,7 +57,7 @@ export default class Character {
       ) {
         this.y = platform.y - this.sizeY / 2;
         this.velocity = 0;
-        this.isGrounded = true;
+        this.onGround = true;
       }
     }
   }
