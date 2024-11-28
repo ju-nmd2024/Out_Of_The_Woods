@@ -1,33 +1,22 @@
-//side to side monster
-class Monster {
-  constructor(x, y, width, height) {
+export default class Monster {
+  constructor(x, y, sizeX, sizeY) {
     this.x = x;
     this.y = y;
-    this.width = width;
-    this.height = height;
-    this.xSpeed = -3;
+    this.sizeX = sizeX;
+    this.sizeY = sizeY;
+    this.movementSpeed = -2;
   }
 
   draw() {
+    push();
     fill(38, 14, 63);
     stroke(38, 14, 63);
-    rect(this.x, this.y, this.width, this.height);
+    rect(this.x, this.y, this.sizeX, this.sizeY);
     fill(255);
-    ellipse(this.x + 22, this.y + 12, 15);
+    ellipse(this.x + 22, this.y + 12, this.sizeX / 6);
     stroke(255);
-    strokeWeight(6);
+    strokeWeight(2);
     line(this.x + 10, this.y + 10, this.x + 25, this.y + 2);
+    pop();
   }
-}
-
-let Monster1;
-
-function setup() {
-  createCanvas(1000, 1000);
-  Monster1 = new Monster(200, 200, 80, 40);
-}
-
-function draw() {
-  background(220);
-  Monster1.draw();
 }
