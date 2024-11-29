@@ -1,13 +1,13 @@
 import Character from "./character.js";
 import Platform from "./platforms.js";
-import Monster from "./monsters.js";
+//import Monster from "./monsters.js";
 
 let state = "game";
 let hearts = 3;
 
 let character;
 let platforms = [];
-let monsters = [];
+//let monsters = [];
 
 function setup() {
   createCanvas(1000, 800);
@@ -70,9 +70,9 @@ function draw() {
       platform.draw();
     }
 
-    for (let monster of monsters) {
-      monster.draw();
-    }
+    //for (let monster of monsters) {
+      //monster.draw();
+    //}
 
     if (character.y >= 910) {
       hearts--;
