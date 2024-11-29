@@ -1,11 +1,11 @@
 //side to side monster
 class Monster {
   constructor(x, y) {
-    this.x = 200;
-    this.y = 200;
+    this.x = x;
+    this.y = y;
     this.width = 80;
     this.height = 50;
-    this.xSpeed = -0;
+    this.xSpeed = -2;
   }
   draw() {
     fill(0, 240, 48);
@@ -30,16 +30,20 @@ class Monster {
   }
 }
 
-let Monster1;
+//array
+let monsters = [];
 
 function setup() {
   createCanvas(1000, 1000);
-  Monster1 = new Monster();
+  monsters.push(new Monster(200, 200));
 }
 
 function draw() {
   background(220);
 
-  Monster1.move();
-  Monster1.draw();
+  //loop
+  for (let i = 0; i < 1; i++) {
+    monsters[i].move();
+    monsters[i].draw();
+  }
 }
