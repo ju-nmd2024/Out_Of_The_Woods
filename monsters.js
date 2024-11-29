@@ -1,5 +1,5 @@
 //side to side monster
-class Monster {
+class FloorMonster {
   constructor(x, y) {
     this.x = x;
     this.y = y;
@@ -7,6 +7,8 @@ class Monster {
     this.height = 50;
     this.xSpeed = -2;
   }
+
+  //drawing
   draw() {
     fill(0, 240, 48);
     stroke(0);
@@ -21,6 +23,8 @@ class Monster {
     fill(255, 71, 71);
     ellipse(this.x, this.y + 30, 20, 40);
   }
+
+  //if statement for movement
   move() {
     this.x += this.xSpeed;
 
@@ -30,19 +34,45 @@ class Monster {
   }
 }
 
+//up and down monster
+class FlyingMonster extends FloorMonster {
+  constructor(x, y) {
+    super(x, y);
+    this.ySpeed = -2;
+  }
+
+  //drawing
+  draw() {
+    fill(255, 0, 0);
+    stroke(0);
+    ellipse(this.x, this.y, this.width);
+  }
+
+  //if statement for movement
+  move() {
+    this.y += this.ySpeed;
+
+    if (this.y > 400 || this.y < 200) {
+      this.ySpeed *= -1;
+    }
+  }
+}
+
 //array
-let monsters = [];
+const monsters = [];
 
 function setup() {
   createCanvas(1000, 1000);
-  monsters.push(new Monster(200, 200));
+
+  monsters.push(new FloorMonster(200, 200));
+  monsters.push(new FlyingMonster(500, 200));
 }
 
 function draw() {
-  background(220);
+  background(255);
 
   //loop
-  for (let i = 0; i < 1; i++) {
+  for (let i = 0; i < monsters.length; i++) {
     monsters[i].move();
     monsters[i].draw();
   }
