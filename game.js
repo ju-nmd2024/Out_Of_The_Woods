@@ -2,15 +2,22 @@ import Character from "./character.js";
 import Platform from "./platforms.js";
 //import Monster from "./monsters.js";
 
-let state = "game";
+let state = "start";
+let startScreenBg;
 let hearts = 3;
 
 let character;
 let platforms = [];
 //let monsters = [];
 
+function preload() {
+  startScreenBg = loadImage("assets/startScreenBg.png");
+}
+
+window.preload = preload;
+
 function setup() {
-  createCanvas(1000, 800);
+  createCanvas(1000, 700);
   frameRate(60);
   textAlign(CENTER);
 
@@ -21,7 +28,7 @@ function setup() {
   platforms.push(new Platform(400, 800, 100, 25));
   platforms.push(new Platform(700, 800, 100, 25));
   platforms.push(new Platform(900, 800, 100, 25));
-  platforms.push(new Platform(1200, 800, 100, 25));
+  platforms.push(new Platform(1200, 800, 200, 25));
 
   //Monsters
   // monsters.push(new Monster(710, 759, 70, 40));
@@ -40,13 +47,21 @@ function draw() {
   }
 
   function startScreen() {
-    background(0, 255, 0);
-    textSize(60);
-    text("GAME TITLE", width / 2, height / 2);
+    push();
+    image(startScreenBg, 0, -100);
+    textSize(120);
+    fill(255);
+    stroke(0);
+    strokeWeight(2);
+    text("GAME TITLE", width / 2, height / 2 - 120);
+    pop();
+
+    //Start Button
+    button();
   }
 
   function gameScreen() {
-    background(100);
+    clear();
 
     //Hearts HUD
     push();
@@ -71,10 +86,10 @@ function draw() {
     }
 
     //for (let monster of monsters) {
-      //monster.draw();
+    //monster.draw();
     //}
 
-    if (character.y >= 910) {
+    if (character.y >= 920) {
       hearts--;
       character.camera = 0;
       resetCharacter();
@@ -95,6 +110,15 @@ function draw() {
     background(100);
     textSize(60);
     text("RESULT", width / 2, height / 2);
+  }
+
+  function button() {
+    push();
+    rectMode(CENTER);
+    rect(width / 2, height / 2, 150, 40, 12);
+    textSize(30);
+    fill(0);
+    pop();
   }
 }
 
