@@ -56,8 +56,27 @@ function draw() {
     text("GAME TITLE", width / 2, height / 2 - 120);
     pop();
 
-    //Start Button
-    button();
+    //Restart Button
+    if (
+      mouseX >= 430 &&
+      mouseX <= 570 &&
+      mouseY >= 325 &&
+      mouseY <= 370 &&
+      mouseIsPressed
+    ) {
+      state = "game";
+    }
+
+    if (mouseX >= 430 && mouseX <= 570 && mouseY >= 325 && mouseY <= 370) {
+      buttonHover();
+      textSize(30);
+      text("START", width / 2, height / 2 + 12);
+    } else {
+      button();
+      fill(0);
+      textSize(30);
+      text("START", width / 2, height / 2 + 12);
+    }
   }
 
   function gameScreen() {
@@ -109,17 +128,48 @@ function draw() {
   function resultScreen() {
     background(100);
     textSize(60);
-    text("RESULT", width / 2, height / 2);
-  }
+    text("RESULT", width / 2, height / 2 - 120);
 
-  function button() {
-    push();
-    rectMode(CENTER);
-    rect(width / 2, height / 2, 150, 40, 12);
-    textSize(30);
-    fill(0);
-    pop();
+    if (
+      mouseX >= 430 &&
+      mouseX <= 570 &&
+      mouseY >= 325 &&
+      mouseY <= 370 &&
+      mouseIsPressed
+    ) {
+      state = "game";
+      hearts = 3;
+    }
+
+    if (mouseX >= 430 && mouseX <= 570 && mouseY >= 325 && mouseY <= 370) {
+      buttonHover();
+      textSize(25);
+      text("RESTART", width / 2, height / 2 + 9);
+    } else {
+      button();
+      fill(0);
+      textSize(25);
+      text("RESTART", width / 2, height / 2 + 9);
+    }
   }
+}
+
+//Button stylings
+function button() {
+  push();
+  rectMode(CENTER);
+  fill(255);
+  rect(width / 2, height / 2, 140, 40, 10);
+  pop();
+}
+
+//Button stylings when you hover over it
+function buttonHover() {
+  push();
+  rectMode(CENTER);
+  fill(200);
+  rect(width / 2, height / 2, 140, 40, 10);
+  pop();
 }
 
 window.draw = draw;
