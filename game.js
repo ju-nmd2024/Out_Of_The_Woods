@@ -49,11 +49,11 @@ function draw() {
   function startScreen() {
     push();
     image(startScreenBg, 0, -100);
-    textSize(120);
+    textSize(60);
     fill(255);
     stroke(0);
     strokeWeight(2);
-    text("GAME TITLE", width / 2, height / 2 - 120);
+    text("GAME TITLE", width / 2, height / 2 - 60);
     pop();
 
     //Restart Button
