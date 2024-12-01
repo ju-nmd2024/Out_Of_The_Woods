@@ -1,11 +1,16 @@
 //side to side monster
-class FloorMonster {
+export default class Monster {
   constructor(x, y) {
     this.x = x;
     this.y = y;
     this.width = 80;
     this.height = 50;
-    this.xSpeed = -2;
+    this.xSpeed = 1;
+
+    //minimum x position
+    this.minX = x - 90;
+    //max x postion
+    this.maxX = x + 90;
   }
 
   //drawing
@@ -24,18 +29,18 @@ class FloorMonster {
     ellipse(this.x, this.y + 30, 20, 40);
   }
 
-  //if statement for movement
+  //movement
   move() {
     this.x += this.xSpeed;
 
-    if (this.x > 300 || this.x < 20) {
+    if (this.x <= this.minX || this.x >= this.maxX) {
       this.xSpeed *= -1;
     }
   }
 }
 
 //up and down monster
-class FlyingMonster extends FloorMonster {
+class FlyingMonster extends Monster {
   constructor(x, y) {
     super(x, y);
     this.ySpeed = -2;
@@ -43,37 +48,25 @@ class FlyingMonster extends FloorMonster {
 
   //drawing
   draw() {
+    //base
     fill(255, 0, 0);
     stroke(0);
+    //eyes
     ellipse(this.x, this.y, this.width);
+    fill(0);
+    ellipse(this.x - 20, this.y, this.width - 70);
+    ellipse(this.x + 20, this.y, this.width - 70);
+    //eyebrows
+    line(this.x - 20, this.y - 10, this.x - 10, this.y);
+    //mouth
   }
 
-  //if statement for movement
+  //movement
   move() {
     this.y += this.ySpeed;
 
-    if (this.y > 400 || this.y < 200) {
-      this.ySpeed *= -1;
+    if (this.x <= this.minX || this.x >= this.maxX) {
+      this.xSpeed *= -1;
     }
-  }
-}
-
-//array
-const monsters = [];
-
-function setup() {
-  createCanvas(1000, 1000);
-
-  monsters.push(new FloorMonster(200, 200));
-  monsters.push(new FlyingMonster(500, 200));
-}
-
-function draw() {
-  background(255);
-
-  //loop
-  for (let i = 0; i < monsters.length; i++) {
-    monsters[i].move();
-    monsters[i].draw();
   }
 }

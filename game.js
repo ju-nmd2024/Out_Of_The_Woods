@@ -1,6 +1,6 @@
 import Character from "./character.js";
 import Platform from "./platforms.js";
-//import Monster from "./monsters.js";
+import Monster from "./monsters.js";
 
 let state = "start";
 let startScreenBg;
@@ -11,7 +11,7 @@ let hearts = 3;
 
 let character;
 let platforms = [];
-//let monsters = [];
+let monsters = [];
 
 function preload() {
   startScreenBg = loadImage("assets/startScreenBg.png");
@@ -32,12 +32,11 @@ function setup() {
 
   //Platforms
   platforms.push(new Platform(400, 800, 100, 25));
-  platforms.push(new Platform(700, 800, 100, 25));
-  platforms.push(new Platform(900, 800, 100, 25));
+  platforms.push(new Platform(600, 800, 300, 25));
   platforms.push(new Platform(1200, 800, 100000000000000, 25));
 
   //Monsters
-  // monsters.push(new Monster(710, 759, 70, 40));
+  monsters.push(new Monster(710, 759, 70, 40));
 }
 
 window.setup = setup;
@@ -120,9 +119,10 @@ function draw() {
       platform.draw();
     }
 
-    //for (let monster of monsters) {
-    //monster.draw();
-    //}
+    for (let monster of monsters) {
+    monster.draw();
+    monster.move();
+    }
 
     if (character.y >= 920) {
       hearts--;
