@@ -10,6 +10,7 @@ export default class Character {
     this.onGround = false;
     this.jumpHeight = -12;
     this.camera = 0;
+    this.bgScroll = 0;
   }
 
   draw() {
@@ -26,9 +27,11 @@ export default class Character {
     if (keyIsDown(65) || keyIsDown(37)) {
       this.x -= this.movementSpeed;
       this.camera += this.movementSpeed;
+      this.bgScroll += 3;
     } else if (keyIsDown(68) || keyIsDown(39)) {
       this.x += this.movementSpeed;
       this.camera -= this.movementSpeed;
+      this.bgScroll -= 3;
     }
 
     //Jumping

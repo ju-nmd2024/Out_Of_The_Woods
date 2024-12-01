@@ -4,6 +4,9 @@ import Platform from "./platforms.js";
 
 let state = "start";
 let startScreenBg;
+let gameScreenBg1;
+let gameScreenBg2;
+let gameScreenBg3;
 let hearts = 3;
 
 let character;
@@ -12,6 +15,9 @@ let platforms = [];
 
 function preload() {
   startScreenBg = loadImage("assets/startScreenBg.png");
+  gameScreenBg1 = loadImage("assets/gameScreenBg.png");
+  gameScreenBg2 = loadImage("assets/gameScreenBg.png");
+  gameScreenBg3 = loadImage("assets/gameScreenBg.png");
 }
 
 window.preload = preload;
@@ -28,7 +34,7 @@ function setup() {
   platforms.push(new Platform(400, 800, 100, 25));
   platforms.push(new Platform(700, 800, 100, 25));
   platforms.push(new Platform(900, 800, 100, 25));
-  platforms.push(new Platform(1200, 800, 200, 25));
+  platforms.push(new Platform(1200, 800, 100000000000000, 25));
 
   //Monsters
   // monsters.push(new Monster(710, 759, 70, 40));
@@ -56,7 +62,7 @@ function draw() {
     text("GAME TITLE", width / 2, height / 2 - 60);
     pop();
 
-    //Restart Button
+    //Start button
     if (
       mouseX >= 430 &&
       mouseX <= 570 &&
@@ -81,6 +87,16 @@ function draw() {
 
   function gameScreen() {
     clear();
+    //Background Images
+    image(gameScreenBg1, character.bgScroll - 1000, 0);
+    image(gameScreenBg2, character.bgScroll, 0);
+    image(gameScreenBg3, character.bgScroll + 1000, 0);
+
+    if (character.bgScroll <= -width) {
+      character.bgScroll = 0;
+    } else if (character.bgScroll >= width) {
+      character.bgScroll = 0;
+    }
 
     //Hearts HUD
     push();
@@ -112,6 +128,7 @@ function draw() {
       hearts--;
       character.camera = 0;
       resetCharacter();
+      character.bgScroll = 0;
     }
 
     if (hearts === 0) {
@@ -130,6 +147,7 @@ function draw() {
     textSize(60);
     text("RESULT", width / 2, height / 2 - 120);
 
+    //Restart button
     if (
       mouseX >= 430 &&
       mouseX <= 570 &&
