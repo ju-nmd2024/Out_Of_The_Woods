@@ -54,16 +54,14 @@ class FlyingMonster extends Monster {
   //drawing
   draw() {
     //base
-    fill(255, 0, 0);
-    stroke(0);
-    //eyes
+    fill(107, 86, 113);
+    stroke(1);
+    //eye
     ellipse(this.x, this.y, this.width);
+    fill(255);
+    ellipse(this.x, this.y, this.width - 30);
     fill(0);
-    ellipse(this.x - 20, this.y, this.width - 70);
-    ellipse(this.x + 20, this.y, this.width - 70);
-    //eyebrows
-    line(this.x - 20, this.y - 10, this.x - 10, this.y);
-    //mouth
+    ellipse(this.x, this.y, this.width - 78, this.height - 40);
   }
 
   //movement
