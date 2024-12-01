@@ -124,19 +124,15 @@ function draw() {
     for (let monster of monsters) {
     monster.draw();
     monster.move();
+    if (
+      character.x < monster.x + monster.width &&         
+      character.x + character.sizeX > monster.x && 
+      character.y < monster.y + monster.height &&        
+      character.y + character.sizeY > monster.y         
+    ) {
+      hearts--;
+      resetCharacter(); 
     }
-
-    //monster collison
-    for (let monster of monsters){
-      if (
-        character.x < monster.x + monster.width &&         
-        character.x + character.sizeX > monster.x && 
-        character.y < monster.y + monster.height &&        
-        character.y + character.sizeY > monster.y         
-      ) {
-        hearts--;
-        resetCharacter(); 
-      }
     }
 
     if (character.y >= 920) {

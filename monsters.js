@@ -6,16 +6,10 @@ export default class Monster {
     this.width = 80;
     this.height = 50;
     this.xSpeed = 1;
-
-    //minimum x position
     this.minX = x - 90;
-    //max x postion
     this.maxX = x + 90;
-
-    //y positions
-    this.minY=  y - 200;
-    this.maxY= y + 200;
-    
+    this.minY = y - 200;
+    this.maxY = y + 200;
   }
 
   //drawing
