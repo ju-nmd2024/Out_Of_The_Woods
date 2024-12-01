@@ -37,6 +37,8 @@ function setup() {
 
   //Monsters
   monsters.push(new Monster(710, 759, 70, 40));
+  monsters.push(new FlyingMonster(710, 350, 70, 40));
+
 }
 
 window.setup = setup;

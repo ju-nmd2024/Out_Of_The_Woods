@@ -11,6 +11,11 @@ export default class Monster {
     this.minX = x - 90;
     //max x postion
     this.maxX = x + 90;
+
+    //y positions
+    this.minY=  y - 200;
+    this.maxY= y + 200;
+    
   }
 
   //drawing
@@ -43,7 +48,7 @@ export default class Monster {
 class FlyingMonster extends Monster {
   constructor(x, y) {
     super(x, y);
-    this.ySpeed = -2;
+    this.ySpeed = -1;
   }
 
   //drawing
@@ -65,8 +70,8 @@ class FlyingMonster extends Monster {
   move() {
     this.y += this.ySpeed;
 
-    if (this.x <= this.minX || this.x >= this.maxX) {
-      this.xSpeed *= -1;
+    if (this.y <= this.minY || this.y >= this.maxY) {
+      this.ySpeed *= -1;
     }
   }
 }
