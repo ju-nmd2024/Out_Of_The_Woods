@@ -124,6 +124,19 @@ function draw() {
     monster.move();
     }
 
+    //monster collison
+    for (let monster of monsters){
+      if (
+        character.x < monster.x + monster.width &&         
+        character.x + character.sizeX > monster.x && 
+        character.y < monster.y + monster.height &&        
+        character.y + character.sizeY > monster.y         
+      ) {
+        hearts--;
+        resetCharacter(); 
+      }
+    }
+
     if (character.y >= 920) {
       hearts--;
       character.camera = 0;
