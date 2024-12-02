@@ -27,18 +27,17 @@ function setup() {
   frameRate(60);
   textAlign(CENTER);
 
-  //Character
-  character = new Character(450, 767, 65, 65);
-
   //Platforms
   platforms.push(new Platform(400, 800, 100, 25));
   platforms.push(new Platform(600, 800, 300, 25));
-  platforms.push(new Platform(1200, 800, 100000000000000, 25));
+  platforms.push(new Platform(1100, 800, 200, 25));
+
+  //Character
+  character = new Character(450, 767, 65, 65);
 
   //Monsters
   monsters.push(new Monster(710, 759, 70, 40));
   monsters.push(new FlyingMonster(710, 350, 70, 40));
-
 }
 
 window.setup = setup;
@@ -93,6 +92,7 @@ function draw() {
     image(gameScreenBg2, character.bgScroll, 0);
     image(gameScreenBg3, character.bgScroll + 1000, 0);
 
+    //Makes the background scroll
     if (character.bgScroll <= -width) {
       character.bgScroll = 0;
     } else if (character.bgScroll >= width) {
@@ -114,34 +114,38 @@ function draw() {
 
     scale(0.8);
     translate(character.camera, 0);
-    character.draw();
     character.update(platforms);
 
     for (let platform of platforms) {
       platform.draw();
     }
 
+    character.draw();
+
     for (let monster of monsters) {
-    monster.draw();
-    monster.move();
-    if (
-      character.x < monster.x + monster.width &&         
-      character.x + character.sizeX > monster.x && 
-      character.y < monster.y + monster.height &&        
-      character.y + character.sizeY > monster.y         
-    ) {
-      hearts--;
-      resetCharacter(); 
-    }
+      monster.draw();
+      monster.move();
+      if (
+        character.x < monster.x + monster.width &&
+        character.x + character.sizeX > monster.x &&
+        character.y < monster.y + monster.height &&
+        character.y + character.sizeY > monster.y
+      ) {
+        character.camera = 0;
+        hearts--;
+        resetCharacter();
+      }
     }
 
+    //If the player falls, they lose a life
     if (character.y >= 920) {
       hearts--;
       character.camera = 0;
-      resetCharacter();
       character.bgScroll = 0;
+      resetCharacter();
     }
 
+    //If the player has no lives left they get sent the the result screen
     if (hearts === 0) {
       state = "result";
     }
@@ -176,12 +180,16 @@ function draw() {
       text("RESTART", width / 2, height / 2 + 9);
     } else {
       button();
+      push();
       fill(0);
       textSize(25);
       text("RESTART", width / 2, height / 2 + 9);
+      pop();
     }
   }
 }
+
+window.draw = draw;
 
 //Button stylings
 function button() {
@@ -200,5 +208,3 @@ function buttonHover() {
   rect(width / 2, height / 2, 140, 40, 10);
   pop();
 }
-
-window.draw = draw;

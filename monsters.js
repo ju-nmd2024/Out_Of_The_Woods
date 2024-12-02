@@ -14,6 +14,8 @@ export default class Monster {
 
   //drawing
   draw() {
+    push();
+    strokeWeight(5);
     fill(0, 240, 48);
     stroke(0);
     rect(this.x, this.y, this.width, this.height);
@@ -21,11 +23,11 @@ export default class Monster {
     stroke(2);
     ellipse(this.x + 22, this.y + 12, 15);
     stroke(0);
-    strokeWeight(5);
     line(this.x + 10, this.y + 10, this.x + 30, this.y + 4);
     stroke(0);
     fill(255, 71, 71);
     ellipse(this.x, this.y + 30, 20, 40);
+    pop();
   }
 
   //movement
@@ -48,6 +50,8 @@ class FlyingMonster extends Monster {
   //drawing
   draw() {
     //base
+    push();
+    strokeWeight(5);
     fill(107, 86, 113);
     stroke(1);
     //eye
@@ -56,6 +60,7 @@ class FlyingMonster extends Monster {
     ellipse(this.x, this.y, this.width - 30);
     fill(0);
     ellipse(this.x, this.y, this.width - 78, this.height - 40);
+    pop();
   }
 
   //movement

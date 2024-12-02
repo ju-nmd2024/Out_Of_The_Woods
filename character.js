@@ -14,12 +14,26 @@ export default class Character {
   }
 
   draw() {
-    fill(225);
-    ellipse(this.x - 15, this.y + 25, this.sizeX - 90, this.sizeY - 80);
-    ellipse(this.x + 15, this.y + 25, this.sizeX - 90, this.sizeY - 80);
-    ellipse(this.x - 25, this.y - 5, this.sizeX - 90, this.sizeY - 80);
-    ellipse(this.x + 25, this.y - 5, this.sizeX - 90, this.sizeY - 80);
-    ellipse(this.x, this.y, this.sizeX, this.sizeY);
+    push();
+    fill(255);
+    strokeWeight(2);
+    //Body
+    ellipse(this.x, this.y - 5, this.sizeX, this.sizeY);
+    //Feet
+    ellipse(this.x, this.y + 28, this.sizeX - 35, this.sizeY - 50);
+    //Arms
+    ellipse(this.x, this.y - 1, this.sizeX - 78, this.sizeY - 38);
+    //Eyes
+    if (keyIsDown(65) || keyIsDown(37)) {
+      ellipse(this.x - 20, this.y - 10, this.sizeX - 80, this.sizeY - 80);
+      fill(0);
+      ellipse(this.x - 22, this.y - 10, this.sizeX - 72, this.sizeY - 72);
+    } else {
+      ellipse(this.x + 20, this.y - 10, this.sizeX - 80, this.sizeY - 80);
+      fill(0);
+      ellipse(this.x + 22, this.y - 10, this.sizeX - 72, this.sizeY - 72);
+    }
+    pop();
   }
 
   update(platforms) {
