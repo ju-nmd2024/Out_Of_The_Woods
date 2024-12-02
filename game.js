@@ -28,16 +28,22 @@ function setup() {
   textAlign(CENTER);
 
   //Platforms
-  platforms.push(new Platform(400, 800, 100, 25));
-  platforms.push(new Platform(600, 800, 300, 25));
-  platforms.push(new Platform(1100, 800, 200, 25));
 
+  //starting platform
+  platforms.push(new Platform(100, 800, 100, 25));
+  //second 
+  platforms.push(new Platform(300, 700, 150, 25));
+  //one with monster on it
+  platforms.push(new Platform(600, 600, 300, 25));
+  //4th
+  platforms.push(new Platform(300, 500, 150, 25));
+  //
+  platforms.push(new Platform(600, 400, 150, 25));
   //Character
-  character = new Character(450, 767, 65, 65);
+  character = new Character(150, 767, 65, 65);
 
   //Monsters
-  monsters.push(new Monster(710, 759, 70, 40));
-  monsters.push(new FlyingMonster(710, 350, 70, 40));
+  monsters.push(new Monster(710, 559, 70, 40));
 }
 
 window.setup = setup;
@@ -151,8 +157,8 @@ function draw() {
     }
 
     function resetCharacter() {
-      character.x = 450;
-      character.y = 767;
+      character.x = 150;
+      character.y = 700;
       character.velocity = 0;
     }
   }
