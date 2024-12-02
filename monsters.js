@@ -1,11 +1,11 @@
 //side to side monster
-export default class Monster {
+class Monster {
   constructor(x, y) {
     this.x = x;
     this.y = y;
     this.width = 80;
     this.height = 50;
-    this.xSpeed = 1;
+    this.xSpeed = 1.5;
     this.minX = x - 90;
     this.maxX = x + 90;
     this.minY = y - 80;
@@ -44,7 +44,7 @@ export default class Monster {
 class FlyingMonster extends Monster {
   constructor(x, y) {
     super(x, y);
-    this.ySpeed = -1;
+    this.ySpeed = -1.5;
   }
 
   //drawing
@@ -72,3 +72,5 @@ class FlyingMonster extends Monster {
     }
   }
 }
+
+export { Monster, FlyingMonster };

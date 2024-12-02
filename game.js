@@ -1,8 +1,8 @@
 import Character from "./character.js";
 import Platform from "./platforms.js";
-import Monster from "./monsters.js";
+import { Monster, FlyingMonster } from "./monsters.js";
 
-let state = "start";
+let state = "game";
 let startScreenBg;
 let gameScreenBg1;
 let gameScreenBg2;
@@ -28,9 +28,8 @@ function setup() {
   textAlign(CENTER);
 
   //Platforms
-
   //starting platform
-  platforms.push(new Platform(100, 800, 100, 25));
+  platforms.push(new Platform(120, 800, 150, 25));
   //2nd
   platforms.push(new Platform(300, 700, 150, 25));
   //3rd with monster on it
@@ -44,13 +43,19 @@ function setup() {
   platforms.push(new Platform(980, 400, 150, 25));
   //7th with flying monster
   platforms.push(new Platform(1300, 400, 150, 25));
-  monsters.push(new FlyingMonster(1380, 300, 70, 40));
+  monsters.push(new FlyingMonster(1600, 300, 70, 40));
   //8th
-  platforms.push(new Platform(1500, 400, 150, 25));
+  platforms.push(new Platform(1700, 400, 150, 25));
+  //9th with monster on it
+  platforms.push(new Platform(2000, 400, 350, 25));
+  monsters.push(new Monster(2100, 360, 70, 40));
+  //10th
+  platforms.push(new Platform(2600, 400, 250, 25));
+  //11th
+  platforms.push(new Platform(3300, 800, 100, 25));
 
-  
   //Character
-  character = new Character(150, 767, 65, 65);
+  character = new Character(200, 767, 65, 65);
 }
 
 window.setup = setup;
@@ -115,13 +120,12 @@ function draw() {
     //Hearts HUD
     push();
     textSize(30);
-    fill(0);
     if (hearts === 3) {
-      text("❤️❤️❤️", width - 60, 30);
+      text("❤️❤️❤️", width - 65, 30);
     } else if (hearts === 2) {
-      text("❤️❤️", width - 40, 30);
+      text("❤️❤️", width - 45, 30);
     } else if (hearts === 1) {
-      text("❤️", width - 20, 30);
+      text("❤️", width - 25, 30);
     }
     pop();
 
@@ -165,16 +169,23 @@ function draw() {
     }
 
     function resetCharacter() {
-      character.x = 150;
+      character.x = 200;
       character.y = 700;
       character.velocity = 0;
     }
   }
 
   function resultScreen() {
-    background(100);
-    textSize(60);
-    text("RESULT", width / 2, height / 2 - 120);
+    if (hearts === 0) {
+      push();
+      background(100);
+      fill(0);
+      textSize(60);
+      text("YOU DIED", width / 2, height / 2 - 120);
+    } else if (hearts === 3 || hearts === 2 || hearts === 1) {
+      text("YOU SURVIVED", width / 2, height / 2 - 120);
+      pop();
+    }
 
     //Restart button
     if (
