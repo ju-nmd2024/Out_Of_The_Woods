@@ -24,7 +24,7 @@ export default class Character {
     //Arms
     ellipse(this.x, this.y - 1, this.w - 78, this.h - 38);
     //Eyes
-    if (keyIsDown(65) || keyIsDown(37)) {
+    if (keyCode === 65 || keyCode === 37) {
       ellipse(this.x - 20, this.y - 10, this.w - 80, this.h - 80);
       fill(0);
       ellipse(this.x - 22, this.y - 10, this.w - 72, this.h - 72);
