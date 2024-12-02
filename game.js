@@ -53,6 +53,12 @@ function setup() {
   platforms.push(new Platform(2600, 400, 250, 25));
   //11th
   platforms.push(new Platform(3300, 800, 100, 25));
+  //12th
+  platforms.push(new Platform(3700, 800, 100, 25));
+  //13th
+  platforms.push(new Platform(3800, 700, 100, 25));
+  //14th
+  platforms.push(new Platform(4100, 700, 100, 25));
 
   //Character
   character = new Character(200, 767, 65, 65);
@@ -119,13 +125,17 @@ function draw() {
 
     //Hearts HUD
     push();
+    fill(150);
+    strokeWeight(2);
+    rectMode(CENTER);
+    rect(69, 15, 140, 50);
     textSize(30);
     if (hearts === 3) {
-      text("❤️❤️❤️", width - 65, 30);
+      text("❤️❤️❤️", width - 932, 30);
     } else if (hearts === 2) {
-      text("❤️❤️", width - 45, 30);
+      text("❤️❤️", width - 932, 30);
     } else if (hearts === 1) {
-      text("❤️", width - 25, 30);
+      text("❤️", width - 932, 30);
     }
     pop();
 
@@ -144,10 +154,10 @@ function draw() {
       monster.move();
       //Monster Collision
       if (
-        character.x < monster.x + monster.width &&
-        character.x + character.sizeX > monster.x &&
-        character.y < monster.y + monster.height &&
-        character.y + character.sizeY > monster.y
+        character.x <= monster.x + monster.width &&
+        character.x + character.w >= monster.x &&
+        character.y <= monster.y + monster.height &&
+        character.y + character.h >= monster.y
       ) {
         character.camera = 0;
         hearts--;
@@ -182,7 +192,12 @@ function draw() {
       fill(0);
       textSize(60);
       text("YOU DIED", width / 2, height / 2 - 120);
+      pop();
     } else if (hearts === 3 || hearts === 2 || hearts === 1) {
+      push();
+      background(100);
+      fill(0);
+      textSize(60);
       text("YOU SURVIVED", width / 2, height / 2 - 120);
       pop();
     }

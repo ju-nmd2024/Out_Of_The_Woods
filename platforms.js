@@ -1,13 +1,13 @@
 export default class Platform {
-  constructor(x, y, sizeX, sizeY) {
+  constructor(x, y, w, h) {
     this.x = x;
     this.y = y;
-    this.sizeX = sizeX;
-    this.sizeY = sizeY;
+    this.w = w;
+    this.h = h;
   }
 
   draw() {
     fill(150);
-    rect(this.x, this.y, this.sizeX, this.sizeY);
+    rect(this.x, this.y, this.w, this.h);
   }
 }

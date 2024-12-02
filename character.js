@@ -1,9 +1,9 @@
 export default class Character {
-  constructor(x, y, sizeX, sizeY) {
+  constructor(x, y, w, h) {
     this.x = x;
     this.y = y;
-    this.sizeX = sizeX;
-    this.sizeY = sizeY;
+    this.w = w;
+    this.h = h;
     this.movementSpeed = 6;
     this.gravity = 0.4;
     this.velocity = 0;
@@ -18,20 +18,20 @@ export default class Character {
     fill(255);
     strokeWeight(2);
     //Body
-    ellipse(this.x, this.y - 5, this.sizeX, this.sizeY);
+    ellipse(this.x, this.y - 5, this.w, this.h);
     //Feet
-    ellipse(this.x, this.y + 28, this.sizeX - 35, this.sizeY - 50);
+    ellipse(this.x, this.y + 28, this.w - 35, this.h - 50);
     //Arms
-    ellipse(this.x, this.y - 1, this.sizeX - 78, this.sizeY - 38);
+    ellipse(this.x, this.y - 1, this.w - 78, this.h - 38);
     //Eyes
     if (keyIsDown(65) || keyIsDown(37)) {
-      ellipse(this.x - 20, this.y - 10, this.sizeX - 80, this.sizeY - 80);
+      ellipse(this.x - 20, this.y - 10, this.w - 80, this.h - 80);
       fill(0);
-      ellipse(this.x - 22, this.y - 10, this.sizeX - 72, this.sizeY - 72);
+      ellipse(this.x - 22, this.y - 10, this.w - 72, this.h - 72);
     } else {
-      ellipse(this.x + 20, this.y - 10, this.sizeX - 80, this.sizeY - 80);
+      ellipse(this.x + 20, this.y - 10, this.w - 80, this.h - 80);
       fill(0);
-      ellipse(this.x + 22, this.y - 10, this.sizeX - 72, this.sizeY - 72);
+      ellipse(this.x + 22, this.y - 10, this.w - 72, this.h - 72);
     }
     pop();
   }
@@ -66,12 +66,12 @@ export default class Character {
     this.onGround = false;
     for (let platform of platforms) {
       if (
-        this.y + this.sizeY / 2 <= platform.y &&
-        this.y + this.sizeY / 2 + this.velocity >= platform.y &&
-        this.x + this.sizeX / 2 - 20 > platform.x &&
-        this.x - this.sizeX / 2 + 20 < platform.x + platform.sizeX
+        this.y + this.h / 2 <= platform.y &&
+        this.y + this.h / 2 + this.velocity >= platform.y &&
+        this.x + this.w / 2 - 20 > platform.x &&
+        this.x - this.w / 2 + 20 < platform.x + platform.w
       ) {
-        this.y = platform.y - this.sizeY / 2;
+        this.y = platform.y - this.h / 2;
         this.velocity = 0;
         this.onGround = true;
       }
