@@ -31,19 +31,26 @@ function setup() {
 
   //starting platform
   platforms.push(new Platform(100, 800, 100, 25));
-  //second 
+  //2nd
   platforms.push(new Platform(300, 700, 150, 25));
-  //one with monster on it
+  //3rd with monster on it
   platforms.push(new Platform(600, 600, 300, 25));
+  monsters.push(new Monster(710, 559, 70, 40));
   //4th
   platforms.push(new Platform(300, 500, 150, 25));
-  //
+  //5th
   platforms.push(new Platform(600, 400, 150, 25));
+  //6th
+  platforms.push(new Platform(980, 400, 150, 25));
+  //7th with flying monster
+  platforms.push(new Platform(1300, 400, 150, 25));
+  monsters.push(new FlyingMonster(1380, 300, 70, 40));
+  //8th
+  platforms.push(new Platform(1500, 400, 150, 25));
+
+  
   //Character
   character = new Character(150, 767, 65, 65);
-
-  //Monsters
-  monsters.push(new Monster(710, 559, 70, 40));
 }
 
 window.setup = setup;
@@ -131,6 +138,7 @@ function draw() {
     for (let monster of monsters) {
       monster.draw();
       monster.move();
+      //Monster Collision
       if (
         character.x < monster.x + monster.width &&
         character.x + character.sizeX > monster.x &&
