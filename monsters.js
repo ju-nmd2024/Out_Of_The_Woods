@@ -8,8 +8,8 @@ class Monster {
     this.xSpeed = 1.5;
     this.minX = x - 90;
     this.maxX = x + 90;
-    this.minY = y - 80;
-    this.maxY = y + 80;
+    this.minY = y - 90;
+    this.maxY = y + 90;
   }
 
   //drawing

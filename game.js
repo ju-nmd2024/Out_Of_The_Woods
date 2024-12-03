@@ -46,13 +46,14 @@ function setup() {
   monsters.push(new FlyingMonster(1600, 300, 70, 40));
   //8th
   platforms.push(new Platform(1700, 400, 150, 25));
-  //9th with monster on it
+  //9th with monster between it
   platforms.push(new Platform(2000, 400, 350, 25));
   monsters.push(new Monster(2100, 360, 70, 40));
   //10th
   platforms.push(new Platform(2600, 400, 250, 25));
-  //11th
+  //11th w monster between
   platforms.push(new Platform(3300, 800, 100, 25));
+  monsters.push(new FlyingMonster(3600, 560, 70, 40));
   //12th
   platforms.push(new Platform(3700, 800, 100, 25));
   //13th
@@ -154,10 +155,10 @@ function draw() {
       monster.move();
       //Monster Collision
       if (
-        character.x <= monster.x + monster.width &&
-        character.x + character.w >= monster.x &&
-        character.y <= monster.y + monster.height &&
-        character.y + character.h >= monster.y
+        character.x < monster.x + monster.width &&
+        character.x + character.w > monster.x &&
+        character.y < monster.y + monster.height &&
+        character.y + character.h > monster.y
       ) {
         character.camera = 0;
         hearts--;
@@ -248,3 +249,7 @@ function buttonHover() {
   rect(width / 2, height / 2, 140, 40, 10);
   pop();
 }
+
+
+/*source for monster collision:
+/*https://developer.mozilla.org/en-US/docs/Games/Techniques/2D_collision_detection*/
