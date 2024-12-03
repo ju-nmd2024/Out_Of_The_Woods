@@ -2,7 +2,7 @@ import Character from "./character.js";
 import Platform from "./platforms.js";
 import { Monster, FlyingMonster } from "./monsters.js";
 
-let state = "game";
+let state = "result";
 let startScreenBg;
 let gameScreenBg1;
 let gameScreenBg2;
@@ -32,7 +32,7 @@ function setup() {
   platforms.push(new Platform(120, 800, 150, 25));
   //2nd
   platforms.push(new Platform(300, 700, 150, 25));
-  //3rd with monster on it
+  //3rd with walking monster on it
   platforms.push(new Platform(600, 600, 300, 25));
   monsters.push(new Monster(710, 559, 70, 40));
   //4th
@@ -43,23 +43,37 @@ function setup() {
   platforms.push(new Platform(980, 400, 150, 25));
   //7th with flying monster
   platforms.push(new Platform(1300, 400, 150, 25));
-  monsters.push(new FlyingMonster(1600, 300, 70, 40));
+  monsters.push(new FlyingMonster(1570, 400, 70, 40));
   //8th
   platforms.push(new Platform(1700, 400, 150, 25));
-  //9th with monster between it
+  //9th with walking monster on it
   platforms.push(new Platform(2000, 400, 350, 25));
-  monsters.push(new Monster(2100, 360, 70, 40));
+  monsters.push(new Monster(2100, 359, 70, 40));
   //10th
   platforms.push(new Platform(2600, 400, 250, 25));
-  //11th w monster between
+  //11th with flying monster between
   platforms.push(new Platform(3300, 800, 100, 25));
-  monsters.push(new FlyingMonster(3600, 560, 70, 40));
+  monsters.push(new FlyingMonster(3600, 760, 70, 40));
   //12th
   platforms.push(new Platform(3700, 800, 100, 25));
   //13th
   platforms.push(new Platform(3800, 700, 100, 25));
   //14th
   platforms.push(new Platform(4100, 700, 100, 25));
+  //15th with flying monster and walking
+  platforms.push(new Platform(4400, 700, 400, 25));
+  monsters.push(new FlyingMonster(4300, 650, 70, 40));
+  monsters.push(new Monster(4600, 659, 70, 40));
+  //16th
+  platforms.push(new Platform(4900, 550, 200, 25));
+  //17th
+  platforms.push(new Platform(5150, 450, 200, 25));
+  //18th
+  platforms.push(new Platform(5400, 350, 100, 25));
+  //19th
+  platforms.push(new Platform(5500, 250, 100, 25));
+  //20th
+  platforms.push(new Platform(5700, 150, 500, 25));
 
   //Character
   character = new Character(200, 767, 65, 65);
@@ -156,7 +170,7 @@ function draw() {
       //Monster Collision
       if (
         character.x < monster.x + monster.width &&
-        character.x + character.w > monster.x &&
+        character.x + character.w / 2 > monster.x &&
         character.y < monster.y + monster.height &&
         character.y + character.h > monster.y
       ) {
@@ -186,6 +200,17 @@ function draw() {
     }
   }
 
+  //Finish Line
+  push();
+  fill(255);
+  strokeWeight(4);
+  rect(6100, 54, 80, 100);
+  pop();
+
+  if (character.x >= 6070) {
+    state = "result";
+  }
+
   function resultScreen() {
     if (hearts === 0) {
       push();
@@ -194,25 +219,17 @@ function draw() {
       textSize(60);
       text("YOU DIED", width / 2, height / 2 - 120);
       pop();
-    } else if (hearts === 3 || hearts === 2 || hearts === 1) {
+    } else if (
+      hearts === 3 ||
+      hearts === 2 ||
+      (hearts === 1 && character.x >= 6070)
+    ) {
       push();
       background(100);
       fill(0);
       textSize(60);
       text("YOU SURVIVED", width / 2, height / 2 - 120);
       pop();
-    }
-
-    //Restart button
-    if (
-      mouseX >= 430 &&
-      mouseX <= 570 &&
-      mouseY >= 325 &&
-      mouseY <= 370 &&
-      mouseIsPressed
-    ) {
-      state = "game";
-      hearts = 3;
     }
 
     if (mouseX >= 430 && mouseX <= 570 && mouseY >= 325 && mouseY <= 370) {
@@ -226,6 +243,18 @@ function draw() {
       textSize(25);
       text("RESTART", width / 2, height / 2 + 9);
       pop();
+    }
+
+    //Restart button
+    if (
+      mouseX >= 430 &&
+      mouseX <= 570 &&
+      mouseY >= 325 &&
+      mouseY <= 370 &&
+      mouseIsPressed
+    ) {
+      state = "game";
+      hearts = 3;
     }
   }
 }
@@ -250,6 +279,7 @@ function buttonHover() {
   pop();
 }
 
-
-/*source for monster collision:
-/*https://developer.mozilla.org/en-US/docs/Games/Techniques/2D_collision_detection*/
+/*
+source for monster collision:
+https://developer.mozilla.org/en-US/docs/Games/Techniques/2D_collision_detection
+*/

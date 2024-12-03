@@ -20,13 +20,10 @@ class Monster {
     stroke(0);
     rect(this.x, this.y, this.width, this.height);
     fill(255, 0, 0);
-    stroke(2);
-    ellipse(this.x + 22, this.y + 12, 15);
-    stroke(0);
+    ellipse(this.x + 22, this.y + 12, this.height - 35);
     line(this.x + 10, this.y + 10, this.x + 30, this.y + 4);
-    stroke(0);
     fill(255, 71, 71);
-    ellipse(this.x, this.y + 30, 20, 40);
+    ellipse(this.x, this.y + 30, this.width - 60, this.height - 10);
     pop();
   }
 
