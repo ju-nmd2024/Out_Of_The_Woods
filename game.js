@@ -2,7 +2,7 @@ import Character from "./character.js";
 import Platform from "./platforms.js";
 import { Monster, FlyingMonster } from "./monsters.js";
 
-let state = "result";
+let state = "start";
 let startScreenBg;
 let gameScreenBg1;
 let gameScreenBg2;
@@ -155,13 +155,13 @@ function draw() {
     pop();
 
     scale(0.8);
+    //Player camera
     translate(character.camera, 0);
-    character.update(platforms);
 
+    character.update(platforms);
     for (let platform of platforms) {
       platform.draw();
     }
-
     character.draw();
 
     for (let monster of monsters) {
@@ -180,6 +180,23 @@ function draw() {
       }
     }
 
+    //Finish line
+    push();
+    fill(255);
+    strokeWeight(4);
+    rect(6100, 54, 80, 100);
+    pop();
+
+    //Win condition
+    if (character.x >= 6070) {
+      state = "result";
+    }
+
+    //Lose condition
+    if (hearts === 0) {
+      state = "result";
+    }
+
     //If the player falls, they lose a life
     if (character.y >= 920) {
       hearts--;
@@ -188,27 +205,11 @@ function draw() {
       resetCharacter();
     }
 
-    //If the player has no lives left they get sent the the result screen
-    if (hearts === 0) {
-      state = "result";
-    }
-
     function resetCharacter() {
       character.x = 200;
       character.y = 700;
       character.velocity = 0;
     }
-  }
-
-  //Finish Line
-  push();
-  fill(255);
-  strokeWeight(4);
-  rect(6100, 54, 80, 100);
-  pop();
-
-  if (character.x >= 6070) {
-    state = "result";
   }
 
   function resultScreen() {
@@ -219,11 +220,7 @@ function draw() {
       textSize(60);
       text("YOU DIED", width / 2, height / 2 - 120);
       pop();
-    } else if (
-      hearts === 3 ||
-      hearts === 2 ||
-      (hearts === 1 && character.x >= 6070)
-    ) {
+    } else if (hearts >= 1) {
       push();
       background(100);
       fill(0);

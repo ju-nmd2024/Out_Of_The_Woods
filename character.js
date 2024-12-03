@@ -57,7 +57,7 @@ export default class Character {
     //Gravity
     this.y += this.velocity;
 
-    //Apply gravity when not grounded
+    //Apply gravity when not on the ground
     if (!this.onGround) {
       this.velocity += this.gravity;
     }
