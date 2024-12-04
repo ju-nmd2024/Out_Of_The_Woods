@@ -15,7 +15,7 @@ export default class Character {
 
   draw() {
     push();
-    fill(255);
+    fill(173, 139, 254);
     strokeWeight(2);
     //Body
     ellipse(this.x, this.y - 5, this.w, this.h);

@@ -1,4 +1,4 @@
-//side to side monster
+//Side to side monster
 class Monster {
   constructor(x, y) {
     this.x = x;
@@ -12,7 +12,7 @@ class Monster {
     this.maxY = y + 90;
   }
 
-  //drawing
+  //Drawing
   draw() {
     push();
     strokeWeight(5);
@@ -27,31 +27,31 @@ class Monster {
     pop();
   }
 
-  //movement
+  //Movement
   move() {
-    this.x += this.xSpeed;
 
     if (this.x <= this.minX || this.x >= this.maxX) {
       this.xSpeed *= -1;
     }
+    this.x += this.xSpeed;
   }
 }
 
-//up and down monster
+//Up and down monster
 class FlyingMonster extends Monster {
   constructor(x, y) {
     super(x, y);
     this.ySpeed = -1.5;
   }
 
-  //drawing
+  //Drawing
   draw() {
-    //base
+    //Base
     push();
     strokeWeight(5);
     fill(107, 86, 113);
     stroke(1);
-    //eye
+    //Eye
     ellipse(this.x, this.y, this.width);
     fill(255);
     ellipse(this.x, this.y, this.width - 30);
@@ -60,13 +60,14 @@ class FlyingMonster extends Monster {
     pop();
   }
 
-  //movement
+  //Movement
   move() {
-    this.y += this.ySpeed;
+
 
     if (this.y <= this.minY || this.y >= this.maxY) {
       this.ySpeed *= -1;
     }
+    this.y += this.ySpeed;
   }
 }
 

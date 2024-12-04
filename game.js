@@ -278,13 +278,13 @@ function draw() {
     if (mouseX <= 994 && mouseX >= 905 && mouseY <= 35 && mouseY >= 0) {
       menuButtonHover();
       fill(0);
-      textSize(20);
-      text("MENU", 950, 25);
+      textSize(25);
+      text("MENU", width / 2, height / 2 + 55);
     } else {
       menuButton();
-      fill(0);
-      textSize(20);
-      text("MENU", 950, 25);
+      fill(255);
+      textSize(25);
+      text("MENU", width / 2, height / 2 + 55);
     }
 
     //Menu button functionality
@@ -355,6 +355,6 @@ function menuButtonHover() {
 }
 
 /*
-source for monster collision:
+Source for Monster collision:
 https://developer.mozilla.org/en-US/docs/Games/Techniques/2D_collision_detection
 */
