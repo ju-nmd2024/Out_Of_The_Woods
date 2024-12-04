@@ -1,13 +1,19 @@
+/*
+Made by Dania Al-Zubeidi and Emil Eriksson
+*/
+
 import Character from "./character.js";
 import Platform from "./platforms.js";
 import { Monster, FlyingMonster } from "./monsters.js";
 
 let state = "start";
+let hearts = 3;
+
+//Backgrounds
 let startScreenBg;
 let gameScreenBg1;
 let gameScreenBg2;
 let gameScreenBg3;
-let hearts = 3;
 
 let character;
 let platforms = [];
@@ -93,11 +99,8 @@ function draw() {
 
   function startScreen() {
     push();
-    image(startScreenBg, 0, -100);
-    textSize(60);
-    fill(255);
-    stroke(0);
-    strokeWeight(2);
+    image(startScreenBg, 0, 0);
+    largeText();
     text("GAME TITLE", width / 2, height / 2 - 60);
     pop();
 
@@ -113,19 +116,17 @@ function draw() {
     }
 
     if (mouseX >= 430 && mouseX <= 570 && mouseY >= 325 && mouseY <= 370) {
-      buttonHover();
+      startButtonHover();
       textSize(30);
       text("START", width / 2, height / 2 + 12);
     } else {
-      button();
-      fill(0);
+      startButton();
       textSize(30);
       text("START", width / 2, height / 2 + 12);
     }
   }
 
   function gameScreen() {
-    clear();
     //Background Images
     image(gameScreenBg1, character.bgScroll - 1000, 0);
     image(gameScreenBg2, character.bgScroll, 0);
@@ -140,22 +141,46 @@ function draw() {
 
     //Hearts HUD
     push();
-    fill(150);
+    fill(255);
     strokeWeight(2);
     rectMode(CENTER);
-    rect(69, 15, 140, 50);
+    rect(75, 19, 140, 40);
     textSize(30);
     if (hearts === 3) {
-      text("❤️❤️❤️", width - 932, 30);
+      text("❤️❤️❤️", width - 925, 28);
     } else if (hearts === 2) {
-      text("❤️❤️", width - 932, 30);
+      text("❤️❤️", width - 925, 30);
     } else if (hearts === 1) {
-      text("❤️", width - 932, 30);
+      text("❤️", width - 925, 30);
     }
     pop();
 
+    //Menu button
+    if (mouseX <= 994 && mouseX >= 905 && mouseY <= 35 && mouseY >= 0) {
+      menuButtonHover();
+      fill(0);
+      textSize(20);
+      text("MENU", 950, 25);
+    } else {
+      menuButton();
+      fill(0);
+      textSize(20);
+      text("MENU", 950, 25);
+    }
+
+    //Menu button functionality
+    if (
+      mouseX <= 994 &&
+      mouseX >= 905 &&
+      mouseY <= 35 &&
+      mouseY >= 0 &&
+      mouseIsPressed
+    ) {
+      state = "start";
+    }
+
     scale(0.8);
-    //Player camera
+    //Character camera
     translate(character.camera, 0);
 
     character.update(platforms);
@@ -183,7 +208,7 @@ function draw() {
     //Finish line
     push();
     fill(255);
-    strokeWeight(4);
+    strokeWeight(6);
     rect(6100, 54, 80, 100);
     pop();
 
@@ -196,45 +221,38 @@ function draw() {
     if (hearts === 0) {
       state = "result";
     }
+  }
 
-    //If the player falls, they lose a life
-    if (character.y >= 920) {
-      hearts--;
-      character.camera = 0;
-      character.bgScroll = 0;
-      resetCharacter();
-    }
-
-    function resetCharacter() {
-      character.x = 200;
-      character.y = 700;
-      character.velocity = 0;
-    }
+  //If the player falls, they lose a life
+  if (character.y >= 920) {
+    hearts--;
+    character.camera = 0;
+    character.bgScroll = 0;
+    resetCharacter();
   }
 
   function resultScreen() {
     if (hearts === 0) {
       push();
-      background(100);
-      fill(0);
-      textSize(60);
-      text("YOU DIED", width / 2, height / 2 - 120);
+      background(0);
+      largeText();
+      text("YOU DIED", width / 2, height / 2 - 60);
       pop();
     } else if (hearts >= 1) {
       push();
-      background(100);
-      fill(0);
-      textSize(60);
-      text("YOU SURVIVED", width / 2, height / 2 - 120);
+      background(0);
+      largeText();
+      text("YOU SURVIVED", width / 2, height / 2 - 60);
       pop();
     }
 
     if (mouseX >= 430 && mouseX <= 570 && mouseY >= 325 && mouseY <= 370) {
-      buttonHover();
+      startButtonHover();
+      fill(0);
       textSize(25);
       text("RESTART", width / 2, height / 2 + 9);
     } else {
-      button();
+      startButton();
       push();
       fill(0);
       textSize(25);
@@ -242,7 +260,7 @@ function draw() {
       pop();
     }
 
-    //Restart button
+    //Restart button functionality
     if (
       mouseX >= 430 &&
       mouseX <= 570 &&
@@ -252,14 +270,55 @@ function draw() {
     ) {
       state = "game";
       hearts = 3;
+      resetCharacter();
+      character.camera = 0;
+    }
+
+    //Menu button
+    if (mouseX <= 994 && mouseX >= 905 && mouseY <= 35 && mouseY >= 0) {
+      menuButtonHover();
+      fill(0);
+      textSize(20);
+      text("MENU", 950, 25);
+    } else {
+      menuButton();
+      fill(0);
+      textSize(20);
+      text("MENU", 950, 25);
+    }
+
+    //Menu button functionality
+    if (
+      mouseX <= 994 &&
+      mouseX >= 905 &&
+      mouseY <= 35 &&
+      mouseY >= 0 &&
+      mouseIsPressed
+    ) {
+      state = "start";
     }
   }
 }
 
 window.draw = draw;
 
-//Button stylings
-function button() {
+//Resets the character to the beginning
+function resetCharacter() {
+  character.x = 200;
+  character.y = 740;
+  character.velocity = 0;
+}
+
+//Large text
+function largeText() {
+  textSize(70);
+  stroke(0);
+  strokeWeight(4);
+  fill(255);
+}
+
+//Start and restart button stylings
+function startButton() {
   push();
   rectMode(CENTER);
   fill(255);
@@ -267,12 +326,31 @@ function button() {
   pop();
 }
 
-//Button stylings when you hover over it
-function buttonHover() {
+//Start and restart button stylings when you hover over them
+function startButtonHover() {
   push();
   rectMode(CENTER);
   fill(200);
   rect(width / 2, height / 2, 140, 40, 10);
+  pop();
+}
+
+//Menu button stylings
+function menuButton() {
+  push();
+  rectMode(CENTER);
+  fill(255);
+  strokeWeight(2);
+  rect(950, 19, 90, 40);
+  pop();
+}
+
+//Menu button stylings when you hover over them
+function menuButtonHover() {
+  push();
+  rectMode(CENTER);
+  fill(200);
+  rect(950, 19, 90, 40);
   pop();
 }
 
