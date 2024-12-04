@@ -1,4 +1,5 @@
 /*
+This is "Out of The Woods" a platformer game!
 Made by Dania Al-Zubeidi and Emil Eriksson
 */
 
@@ -6,18 +7,18 @@ import Character from "./character.js";
 import Platform from "./platforms.js";
 import { Monster, FlyingMonster } from "./monsters.js";
 
+//Game
 let state = "start";
 let hearts = 3;
+let character;
+let platforms = [];
+let monsters = [];
 
 //Backgrounds
 let startScreenBg;
 let gameScreenBg1;
 let gameScreenBg2;
 let gameScreenBg3;
-
-let character;
-let platforms = [];
-let monsters = [];
 
 function preload() {
   startScreenBg = loadImage("assets/startScreenBg.png");
@@ -101,20 +102,10 @@ function draw() {
     push();
     image(startScreenBg, 0, 0);
     largeText();
-    text("GAME TITLE", width / 2, height / 2 - 60);
+    text("OUT OF THE WOODS", width / 2, height / 2 - 60);
     pop();
 
     //Start button
-    if (
-      mouseX >= 430 &&
-      mouseX <= 570 &&
-      mouseY >= 325 &&
-      mouseY <= 370 &&
-      mouseIsPressed
-    ) {
-      state = "game";
-    }
-
     if (mouseX >= 430 && mouseX <= 570 && mouseY >= 325 && mouseY <= 370) {
       startButtonHover();
       textSize(30);
@@ -123,6 +114,16 @@ function draw() {
       startButton();
       textSize(30);
       text("START", width / 2, height / 2 + 12);
+    }
+
+    if (
+      mouseX >= 430 &&
+      mouseX <= 570 &&
+      mouseY >= 325 &&
+      mouseY <= 370 &&
+      mouseIsPressed
+    ) {
+      state = "game";
     }
   }
 
@@ -246,6 +247,7 @@ function draw() {
       pop();
     }
 
+    //Restart button
     if (mouseX >= 430 && mouseX <= 570 && mouseY >= 325 && mouseY <= 370) {
       startButtonHover();
       fill(0);
@@ -260,7 +262,6 @@ function draw() {
       pop();
     }
 
-    //Restart button functionality
     if (
       mouseX >= 430 &&
       mouseX <= 570 &&
@@ -270,29 +271,31 @@ function draw() {
     ) {
       state = "game";
       hearts = 3;
-      resetCharacter();
       character.camera = 0;
+      resetCharacter();
     }
 
     //Menu button
-    if (mouseX <= 994 && mouseX >= 905 && mouseY <= 35 && mouseY >= 0) {
-      menuButtonHover();
+    push();
+    translate(0, 60);
+    if (mouseX >= 430 && mouseX <= 570 && mouseY >= 390 && mouseY <= 428) {
+      startButtonHover();
       fill(0);
       textSize(25);
-      text("MENU", width / 2, height / 2 + 55);
+      text("MENU", 500, 360);
     } else {
-      menuButton();
-      fill(255);
+      startButton();
+      fill(0);
       textSize(25);
-      text("MENU", width / 2, height / 2 + 55);
+      text("MENU", 500, 360);
     }
+    pop();
 
-    //Menu button functionality
     if (
-      mouseX <= 994 &&
-      mouseX >= 905 &&
-      mouseY <= 35 &&
-      mouseY >= 0 &&
+      mouseX >= 430 &&
+      mouseX <= 570 &&
+      mouseY >= 390 &&
+      mouseY <= 428 &&
       mouseIsPressed
     ) {
       state = "start";
@@ -311,9 +314,9 @@ function resetCharacter() {
 
 //Large text
 function largeText() {
-  textSize(70);
+  textSize(75);
   stroke(0);
-  strokeWeight(4);
+  strokeWeight(8);
   fill(255);
 }
 
@@ -355,6 +358,9 @@ function menuButtonHover() {
 }
 
 /*
+Source for loading images:
+https://p5js.org/reference/p5/loadImage/
+
 Source for Monster collision:
 https://developer.mozilla.org/en-US/docs/Games/Techniques/2D_collision_detection
 */
