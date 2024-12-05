@@ -208,9 +208,11 @@ function draw() {
 
     //Finish line
     push();
-    fill(255);
+    fill(0, 255, 0);
     strokeWeight(6);
     rect(6100, 54, 80, 100);
+    fill(0);
+    text("Home", 6137, 85);
     pop();
 
     //Win condition
