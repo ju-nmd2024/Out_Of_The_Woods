@@ -16,18 +16,21 @@ class Monster {
   draw() {
     push();
     strokeWeight(5);
+    //Base
     fill(0, 240, 48);
     stroke(0);
     rect(this.x, this.y, this.width, this.height);
     fill(255, 0, 0);
+    //Eye
     ellipse(this.x + 22, this.y + 12, this.height - 35);
     line(this.x + 10, this.y + 10, this.x + 30, this.y + 4);
+    //Mouth
     fill(255, 71, 71);
     ellipse(this.x, this.y + 30, this.width - 60, this.height - 10);
     pop();
   }
 
-  //Movement
+  //Movement to go back and forward
   move() {
 
     if (this.x <= this.minX || this.x >= this.maxX) {
@@ -60,7 +63,7 @@ class FlyingMonster extends Monster {
     pop();
   }
 
-  //Movement
+  //Movement to go back and forward
   move() {
 
 

@@ -1,6 +1,6 @@
 /*
 This is "Out of The Woods" a platformer game!
-Made by Dania Al-Zubeidi and Emil Eriksson
+Made by Emil Eriksson and Dania Al-Zubeidi
 */
 
 import Character from "./character.js";
