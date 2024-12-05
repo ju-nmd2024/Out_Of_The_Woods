@@ -1,5 +1,5 @@
 /*
-This is "Out of The Woods" a platformer game!
+This is "Out Of The Woods" a platformer game!
 Made by Emil Eriksson and Dania Al-Zubeidi
 */
 
@@ -107,11 +107,15 @@ function draw() {
 
     //Start button
     if (mouseX >= 430 && mouseX <= 570 && mouseY >= 325 && mouseY <= 370) {
+      push();
       startButtonHover();
+      fill(0);
       textSize(30);
       text("START", width / 2, height / 2 + 12);
+      pop();
     } else {
       startButton();
+      fill(0);
       textSize(30);
       text("START", width / 2, height / 2 + 12);
     }
@@ -124,6 +128,9 @@ function draw() {
       mouseIsPressed
     ) {
       state = "game";
+      hearts = 3;
+      character.camera = 0;
+      resetCharacter();
     }
   }
 
@@ -169,7 +176,6 @@ function draw() {
       text("MENU", 950, 25);
     }
 
-    //Menu button functionality
     if (
       mouseX <= 994 &&
       mouseX >= 905 &&
@@ -180,15 +186,16 @@ function draw() {
       state = "start";
     }
 
-    scale(0.8);
     //Character camera
+    scale(0.8);
     translate(character.camera, 0);
 
-    character.update(platforms);
     for (let platform of platforms) {
       platform.draw();
     }
+
     character.draw();
+    character.update(platforms);
 
     for (let monster of monsters) {
       monster.draw();
@@ -239,12 +246,14 @@ function draw() {
       push();
       background(0);
       largeText();
+      fill(255, 0, 0);
       text("YOU DIED", width / 2, height / 2 - 60);
       pop();
-    } else if (hearts >= 1) {
+    } else if (hearts >= 1 && character.x >= 6070) {
       push();
       background(0);
       largeText();
+      fill(0, 255, 0);
       text("YOU SURVIVED", width / 2, height / 2 - 60);
       pop();
     }
@@ -310,7 +319,7 @@ window.draw = draw;
 //Resets the character to the beginning
 function resetCharacter() {
   character.x = 200;
-  character.y = 740;
+  character.y = 767;
   character.velocity = 0;
 }
 
@@ -345,7 +354,6 @@ function menuButton() {
   push();
   rectMode(CENTER);
   fill(255);
-  strokeWeight(2);
   rect(950, 19, 90, 40);
   pop();
 }
