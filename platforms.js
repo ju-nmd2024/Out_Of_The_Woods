@@ -1,4 +1,4 @@
-export default class Platform {
+ class Platform {
   constructor(x, y, w, h) {
     this.x = x;
     this.y = y;
@@ -11,3 +11,14 @@ export default class Platform {
     rect(this.x, this.y, this.w, this.h);
   }
 }
+
+class MovingPlatform extends Platform {
+  constructor(x, y, w, h) {
+    this.x = x;
+    this.y = y;
+    this.w = w;
+    this.h = h;
+  }
+}
+
+export { Platform, MovingPlatform };
