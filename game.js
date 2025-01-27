@@ -4,7 +4,7 @@ Made by Emil Eriksson and Dania Al-Zubeidi
 */
 
 import Character from "./character.js";
-import Platform from "./platforms.js";
+import { Platform, MovingPlatform} from "./platforms.js";
 import { Monster, FlyingMonster } from "./monsters.js";
 
 //Game
@@ -38,7 +38,7 @@ function setup() {
   //starting platform
   platforms.push(new Platform(120, 800, 150, 25));
   //2nd
-  platforms.push(new Platform(300, 700, 150, 25));
+  platforms.push(new MovingPlatform(300, 600, 150, 25, 2, 1));
   //3rd with walking monster on it
   platforms.push(new Platform(600, 600, 300, 25));
   monsters.push(new Monster(710, 559, 70, 40));
@@ -192,6 +192,9 @@ function draw() {
 
     for (let platform of platforms) {
       platform.draw();
+      if (platform instanceof MovingPlatform) {
+        platform.move();
+      }
     }
 
     character.draw();
