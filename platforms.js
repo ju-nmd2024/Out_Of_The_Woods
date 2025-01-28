@@ -13,11 +13,11 @@
 }
 
 class MovingPlatform extends Platform {
-  constructor(x, y, w, h, speed, direction) {
+  constructor(x, y, w, h, speed,) {
     super(x,y, w, h);
     this.speed = speed;
     this.startPoint = y; 
-    this.direction = direction; 
+  
   }
 
   move() {
