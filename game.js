@@ -192,9 +192,6 @@ function draw() {
 
     for (let platform of platforms) {
       platform.draw();
-      if (platform instanceof MovingPlatform) {
-        platform.move();
-      }
     }
 
     character.draw();
