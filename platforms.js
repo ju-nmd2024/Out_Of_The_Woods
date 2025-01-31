@@ -11,22 +11,3 @@
     rect(this.x, this.y, this.w, this.h);
   }
 }
-
-class MovingPlatform extends Platform {
-  constructor(x, y, w, h, speed,) {
-    super(x,y, w, h);
-    this.speed = speed;
-    this.startPoint = y; 
-  
-  }
-
-  move() {
-    if (this.y > this.startPoint + 200 || this.y < this.startPoint - 200) {
-      this.speed *= -1;
-    }
-    this.y += this.speed; 
-  }
-  
-}
-
-export { Platform, MovingPlatform };
