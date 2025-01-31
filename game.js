@@ -4,7 +4,7 @@ Made by Emil Eriksson and Dania Al-Zubeidi
 */
 
 import Character from "./character.js";
-import { Platform, MovingPlatform } from "./platforms.js";
+import  Platform from "./platforms.js";
 import { Monster, FlyingMonster } from "./monsters.js";
 
 //Game
