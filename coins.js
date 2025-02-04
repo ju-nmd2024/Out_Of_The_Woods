@@ -6,4 +6,10 @@ class Coin {
       this.width = 30;   
       this.height = 30;
     }
+    draw() {
+        push();
+        fill(255, 234, 0);  
+        ellipse(this.x, this.y, this.width, this.height);
+        pop();
+      }
 }
