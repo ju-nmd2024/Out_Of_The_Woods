@@ -38,7 +38,7 @@ function setup() {
   //starting platform
   platforms.push(new Platform(120, 800, 150, 25));
   //2nd
-  platforms.push(new Platform(300, 600, 150, 25, 2, 1));
+  platforms.push(new Platform(300, 650, 150, 25, 2, 1));
   //3rd with walking monster on it
   platforms.push(new Platform(600, 600, 300, 25));
   monsters.push(new Monster(710, 559, 70, 40));
