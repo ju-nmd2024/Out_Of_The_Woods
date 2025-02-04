@@ -6,6 +6,7 @@ Made by Emil Eriksson and Dania Al-Zubeidi
 import Character from "./character.js";
 import  Platform from "./platforms.js";
 import { Monster, FlyingMonster } from "./monsters.js";
+import  Coin from "./coins.js";
 
 //Game
 let state = "start";
