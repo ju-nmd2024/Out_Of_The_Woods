@@ -114,6 +114,21 @@ let coinPositions = [
   {x: 2100, y: 250},
   //8th coin
   {x: 2750, y: 250},
+  //9th coin
+  {x: 3350, y: 700},
+  //10th coin
+  {x: 3750, y: 700},
+  //11th coin
+  {x: 3850, y: 650},
+  //12th coin
+  {x: 4500, y: 650},
+  //13th coin
+  {x: 5000, y: 530},
+  //14th coin
+  {x: 5300, y: 310},
+  //15th coin
+  {x: 5550, y: 230},
+
 
 ];
 
