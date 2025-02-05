@@ -48,6 +48,8 @@ function setup() {
   monsters.push(new Monster(710, 559, 70, 40));
   //4th
   platforms.push(new Platform(300, 500, 150, 25));
+  //NEW platform 1
+  platforms.push(new Platform(300, 280, 150, 25));
   //5th
   platforms.push(new Platform(600, 400, 150, 25));
   //6th
@@ -318,6 +320,7 @@ function draw() {
       hearts = 3;
       character.camera = 0;
       resetCharacter();
+      resetCoins();
     }
 
     //Menu button
@@ -350,6 +353,17 @@ function draw() {
 
 window.draw = draw;
 
+function resetCoins() {
+  //Clear array
+  items = [];
+
+  //Coin Reset
+  for (let i = 0; i < numItems; i++) {
+    let coinX = random(300, 6000);  
+    let coinY = random(200, 500);  
+    items.push(new Coin(coinX, coinY, 30, 30));
+  }
+}
 //Resets the character to the beginning
 function resetCharacter() {
   character.x = 200;
