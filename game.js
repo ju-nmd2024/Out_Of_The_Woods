@@ -15,7 +15,6 @@ let character;
 let platforms = [];
 let monsters = [];
 let items = [];
-let numItems = 40; 
 let score= 0;
 
 //Backgrounds
@@ -91,20 +90,32 @@ function setup() {
   //Character
   character = new Character(200, 767, 65, 65);
 
-
-  //Coins
-  for (let i = 0; i < numItems; i++) {
-    //X position
-    let coinX = random(300, 6000);  
-    //Y position
-    let coinY = random(200, 500);  
-    //Array
-    items.push(new Coin(coinX, coinY, 30, 30)); 
+  //Array
+  for (let pos of coinPositions) {
+    items.push(new Coin(pos.x, pos.y, 30, 30)); 
   }
-  
 }
 
 window.setup = setup;
+let coinPositions = [
+  //1st coin
+  {x: 360, y: 600},
+  //2nd coin
+  {x: 678, y: 350},
+  //3rd coin
+  {x: 360, y: 200},
+  //4th coin
+  {x: 1400, y: 250},
+  //5th coin
+  {x: 1600, y: 250},
+  //6th coin
+  {x: 1800, y: 250},
+  //7th coin
+  {x: 2100, y: 250},
+  //8th coin
+  {x: 2750, y: 250},
+
+];
 
 function draw() {
   //Game state logic
@@ -358,11 +369,10 @@ function resetCoins() {
   items = [];
 
   //Coin Reset
-  for (let i = 0; i < numItems; i++) {
-    let coinX = random(300, 6000);  
-    let coinY = random(200, 500);  
-    items.push(new Coin(coinX, coinY, 30, 30));
+  for (let pos of coinPositions) {
+    items.push(new Coin(pos.x, pos.y, 30, 30));
   }
+
 }
 //Resets the character to the beginning
 function resetCharacter() {
