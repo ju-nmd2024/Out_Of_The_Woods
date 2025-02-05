@@ -15,7 +15,7 @@ let character;
 let platforms = [];
 let monsters = [];
 let items = [];
-let numItems = 50; 
+let numItems = 40; 
 let score= 0;
 
 //Backgrounds
@@ -51,7 +51,7 @@ function setup() {
   //5th
   platforms.push(new Platform(600, 400, 150, 25));
   //6th
-  platforms.push(new Platform(980, 400, 150, 25));
+  platforms.push(new Platform(980, 500, 150, 25));
   //7th with flying monster
   platforms.push(new Platform(1300, 400, 150, 25));
   monsters.push(new FlyingMonster(1570, 400, 70, 40));
@@ -93,9 +93,9 @@ function setup() {
   //Coins
   for (let i = 0; i < numItems; i++) {
     //X position
-    let coinX = random(100, 5000);  
+    let coinX = random(300, 6000);  
     //Y position
-    let coinY = random(100, 300);  
+    let coinY = random(200, 500);  
     //Array
     items.push(new Coin(coinX, coinY, 30, 30)); 
   }
