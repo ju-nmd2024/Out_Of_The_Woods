@@ -319,6 +319,12 @@ function draw() {
       text("YOU SURVIVED", width / 2, height / 2 - 60);
       pop();
     }
+    push();
+    fill(255);
+    textSize(30);
+    text(`Score: ${score}`, 500, 190); 
+    pop();
+  
 
     //Restart button
     if (mouseX >= 430 && mouseX <= 570 && mouseY >= 325 && mouseY <= 370) {
