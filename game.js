@@ -14,6 +14,9 @@ let hearts = 3;
 let character;
 let platforms = [];
 let monsters = [];
+let items = [];
+let numItems = 50; 
+let score= 0;
 
 //Backgrounds
 let startScreenBg;
@@ -85,6 +88,18 @@ function setup() {
 
   //Character
   character = new Character(200, 767, 65, 65);
+
+
+  //Coins
+  for (let i = 0; i < numItems; i++) {
+    //X position
+    let coinX = random(100, 5000);  
+    //Y position
+    let coinY = random(100, 300);  
+    //Array
+    items.push(new Coin(coinX, coinY, 30, 30)); 
+  }
+  
 }
 
 window.setup = setup;
@@ -197,6 +212,17 @@ function draw() {
 
     character.draw();
     character.update(platforms);
+
+    //Loop of coins
+    for (let i = items.length - 1; i >= 0; i--) {
+      let coin = items[i];
+      coin.draw(); 
+      if (coin.collect(character)) {
+        items.splice(i, 1); 
+        score += 1; 
+      }
+    }
+
 
     for (let monster of monsters) {
       monster.draw();
