@@ -178,7 +178,14 @@ function draw() {
       text("❤️", width - 925, 30);
     }
     pop();
-
+    //Score system
+    push();
+    fill(55,255,0);
+    strokeWeight(2);
+    textSize(30);
+    text(`Score: ${score}`, 70, 75); 
+    pop();
+  
     //Menu button
     if (mouseX <= 994 && mouseX >= 905 && mouseY <= 35 && mouseY >= 0) {
       menuButtonHover();
