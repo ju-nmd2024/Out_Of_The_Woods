@@ -32,7 +32,6 @@ class Monster {
 
   //Movement to go back and forward
   move() {
-
     if (this.x <= this.minX || this.x >= this.maxX) {
       this.xSpeed *= -1;
     }
@@ -65,8 +64,6 @@ class FlyingMonster extends Monster {
 
   //Movement to go back and forward
   move() {
-
-
     if (this.y <= this.minY || this.y >= this.maxY) {
       this.ySpeed *= -1;
     }

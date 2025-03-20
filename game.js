@@ -4,9 +4,9 @@ Made by Emil Eriksson and Dania Al-Zubeidi
 */
 
 import Character from "./character.js";
-import  Platform from "./platforms.js";
+import Platform from "./platforms.js";
 import { Monster, FlyingMonster } from "./monsters.js";
-import  Coin from "./coins.js";
+import Coin from "./coins.js";
 
 //Game
 let state = "start";
@@ -15,7 +15,7 @@ let character;
 let platforms = [];
 let monsters = [];
 let items = [];
-let score= 0;
+let score = 0;
 
 //Backgrounds
 let startScreenBg;
@@ -92,44 +92,42 @@ function setup() {
 
   //Array
   for (let pos of coinPositions) {
-    items.push(new Coin(pos.x, pos.y, 30, 30)); 
+    items.push(new Coin(pos.x, pos.y, 30, 30));
   }
 }
 
 window.setup = setup;
 let coinPositions = [
   //1st coin
-  {x: 360, y: 600},
+  { x: 360, y: 600 },
   //2nd coin
-  {x: 678, y: 350},
+  { x: 678, y: 350 },
   //3rd coin
-  {x: 360, y: 200},
+  { x: 360, y: 200 },
   //4th coin
-  {x: 1400, y: 250},
+  { x: 1400, y: 250 },
   //5th coin
-  {x: 1600, y: 250},
+  { x: 1600, y: 250 },
   //6th coin
-  {x: 1800, y: 250},
+  { x: 1800, y: 250 },
   //7th coin
-  {x: 2100, y: 250},
+  { x: 2100, y: 250 },
   //8th coin
-  {x: 2750, y: 250},
+  { x: 2750, y: 250 },
   //9th coin
-  {x: 3350, y: 700},
+  { x: 3350, y: 700 },
   //10th coin
-  {x: 3750, y: 700},
+  { x: 3750, y: 700 },
   //11th coin
-  {x: 3850, y: 650},
+  { x: 3850, y: 650 },
   //12th coin
-  {x: 4500, y: 650},
+  { x: 4500, y: 650 },
   //13th coin
-  {x: 5000, y: 530},
+  { x: 5000, y: 530 },
   //14th coin
-  {x: 5300, y: 310},
+  { x: 5300, y: 310 },
   //15th coin
-  {x: 5550, y: 230},
-
-
+  { x: 5550, y: 230 },
 ];
 
 function draw() {
@@ -208,12 +206,12 @@ function draw() {
     pop();
     //Score system
     push();
-    fill(55,255,0);
+    fill(55, 255, 0);
     strokeWeight(2);
     textSize(30);
-    text(`Score: ${score}`, 70, 75); 
+    text(`Score: ${score}`, 70, 75);
     pop();
-  
+
     //Menu button
     if (mouseX <= 994 && mouseX >= 905 && mouseY <= 35 && mouseY >= 0) {
       menuButtonHover();
@@ -251,13 +249,12 @@ function draw() {
     //Loop of coins
     for (let i = items.length - 1; i >= 0; i--) {
       let coin = items[i];
-      coin.draw(); 
+      coin.draw();
       if (coin.collect(character)) {
-        items.splice(i, 1); 
-        score += 1; 
+        items.splice(i, 1);
+        score += 1;
       }
     }
-
 
     for (let monster of monsters) {
       monster.draw();
@@ -322,9 +319,8 @@ function draw() {
     push();
     fill(255);
     textSize(30);
-    text(`Score: ${score}`, 500, 190); 
+    text(`Score: ${score}`, 500, 190);
     pop();
-  
 
     //Restart button
     if (mouseX >= 430 && mouseX <= 570 && mouseY >= 325 && mouseY <= 370) {
@@ -350,6 +346,7 @@ function draw() {
     ) {
       state = "game";
       hearts = 3;
+      score = 0;
       character.camera = 0;
       resetCharacter();
       resetCoins();
@@ -379,6 +376,7 @@ function draw() {
       mouseIsPressed
     ) {
       state = "start";
+      score = 0;
     }
   }
 }
@@ -393,7 +391,6 @@ function resetCoins() {
   for (let pos of coinPositions) {
     items.push(new Coin(pos.x, pos.y, 30, 30));
   }
-
 }
 //Resets the character to the beginning
 function resetCharacter() {
